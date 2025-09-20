@@ -1,0 +1,22 @@
+{
+  "python.defaultInterpreterPath": "${workspaceFolder}/backend/.venv/bin/python",
+
+  "editor.formatOnSave": true,
+
+  "editor.codeActionsOnSave": {
+    "source.organizeImports": true,
+    "source.fixAll": true
+  },
+
+  "python.formatting.provider": "black",
+
+  "ruff.lint.enable": true,
+  "ruff.lint.run": "onSave",
+  "ruff.lint.args": ["--fix"],
+
+  "isort.args": ["--profile", "black"],
+
+  "[python]": {
+    "editor.defaultFormatter": "ms-python.black-formatter"
+  }
+}

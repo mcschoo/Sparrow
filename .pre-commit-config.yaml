@@ -1,0 +1,22 @@
+repos:
+  # Ruff first (fast linter AND import sorter)
+  - repo: https://github.com/astral-sh/ruff-pre-commit
+    rev: v0.6.9
+    hooks:
+      - id: ruff
+        args: [--fix]
+
+  # Black last (stable formatter)
+  - repo: https://github.com/psf/black
+    rev: 24.8.0
+    hooks:
+      - id: black
+
+  # Small hygiene hooks
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v4.6.0
+    hooks:
+      - id: end-of-file-fixer
+        exclude: .pre-commit-config\.yaml
+      - id: trailing-whitespace
+      - id: check-merge-conflict

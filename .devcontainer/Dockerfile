@@ -14,4 +14,3 @@ RUN apt-get update && apt-get install -y \
 
 USER vscode
 WORKDIR /workspace
-

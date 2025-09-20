@@ -15,8 +15,32 @@ black = "^24.8.0"
 ruff = "^0.5.6"
 isort = "^5.13.2"
 pytest = "^8.2.0"
+pre-commit = "^3.8.0"
 
 [build-system]
 requires = ["poetry-core"]
 build-backend = "poetry.core.masonry.api"
 
+[tool.black]
+line-length = 100
+target-version = ["py311"]
+
+[tool.isort]
+profile = "black"
+line_length = 100
+known_first_party = ["rag_shared"]
+sections = ["FUTURE","STDLIB","THIRDPARTY","FIRSTPARTY","LOCALFOLDER"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py311"
+fix = true
+exclude = [
+    ".pre-commit-config.yaml"
+]
+force-exclude = true
+
+[tool.ruff.lint]
+select = ["E","F","I","UP","B","SIM","ARG","PL","RUF"]
+ignore = ["E501"]  # let Black handle line length
+exclude = ["**/migrations/**"]
