@@ -1,8 +1,19 @@
 {
-  "name": "frontend",
+  "name": "rag-frontend",
   "version": "0.1.0",
+  "private": true,
   "scripts": {
-    "dev": "echo 'Frontend placeholder running on :3000' && sleep infinity"
+    "dev": "next dev -p 3000",
+    "build": "next build",
+    "start": "next start -p 3000"
+  },
+  "dependencies": {
+    "next": "14.2.3",
+    "react": "18.3.1",
+    "react-dom": "18.3.1"
+  },
+  "devDependencies": {
+    "typescript": "^5.4.0"
   }
 }
 
