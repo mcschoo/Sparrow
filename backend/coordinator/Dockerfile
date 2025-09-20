@@ -18,6 +18,9 @@ WORKDIR /app
 COPY pyproject.toml poetry.lock* /app/
 RUN poetry install --no-root --only main
 
+COPY shared /app/shared
+RUN pip install -e /app/shared
+
 COPY coordinator/app /app/coordinator/app
 
 USER appuser

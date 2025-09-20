@@ -22,6 +22,10 @@ WORKDIR /app
 COPY pyproject.toml poetry.lock* /app/
 RUN poetry install --no-root --only main
 
+# after poetry install
+COPY shared /app/shared
+RUN pip install -e /app/shared
+
 # Copy service code
 COPY api/app /app/api/app
 
