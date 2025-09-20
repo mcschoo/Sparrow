@@ -1,0 +1,8 @@
+{
+  "name": "frontend",
+  "version": "0.1.0",
+  "scripts": {
+    "dev": "echo 'Frontend placeholder running on :3000' && sleep infinity"
+  }
+}
+
