@@ -1,4 +1,5 @@
 # Sparrow RAG Platform - System Design
+** Currently setting up environment, github workflows, and linters
 
 ## Tech Stack
 
