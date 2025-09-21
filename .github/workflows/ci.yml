@@ -1,0 +1,51 @@
+name: CI - Fast Lint & Test
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+jobs:
+  backend:
+    name: Python lint & test
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install Poetry
+        run: pip install poetry
+
+      - name: Install dependencies
+        run: poetry install --with dev
+
+      - name: Lint (Ruff + Black)
+        run: |
+          poetry run ruff check --fix .
+          poetry run black --check .
+
+      - name: Run tests
+        run: poetry run pytest -q --disable-warnings
+
+  frontend:
+    name: Node lint
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Lint (ESLint + Prettier)
+        run: |
+          npx eslint . --ext .js,.jsx,.ts,.tsx
+          npx prettier --check .
