@@ -14,9 +14,38 @@
   "ruff.lint.run": "onSave",
   "ruff.lint.args": ["--fix"],
 
-  "isort.args": ["--profile", "black"],
-
   "[python]": {
     "editor.defaultFormatter": "ms-python.black-formatter"
+  },
+
+  "files.watcherExclude": {
+    "**/.git/objects/**": true,
+    "**/.git/subtree-cache/**": true,
+    "**/node_modules/**": true,
+    "**/.venv/**": true,
+    "**/__pycache__/**": true,
+    "**/.pytest_cache/**": true,
+    "**/.ruff_cache/**": true,
+    "**/.next/**": true,
+    "**/out/**": true,
+    "**/dist/**": true,
+    "**/.dockerignore": true,
+    "**/postgres_data/**": true,
+    "**/qdrant_data/**": true,
+    "**/es_data/**": true,
+    "**/redis_data/**": true
+  },
+
+  "search.exclude": {
+    "**/node_modules": true,
+    "**/.venv": true,
+    "**/__pycache__": true,
+    "**/.next": true
+  },
+
+  "files.exclude": {
+    "**/__pycache__": true,
+    "**/.pytest_cache": true,
+    "**/.ruff_cache": true
   }
 }

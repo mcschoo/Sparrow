@@ -88,3 +88,39 @@ jobs:
 
       - name: Run pre-commit hooks
         run: poetry run pre-commit run --all-files --show-diff-on-failure
+
+  smoke:
+    name: Smoke tests
+    runs-on: ubuntu-latest
+    needs:
+      - backend
+      - frontend
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: "poetry"
+
+      - name: Install Poetry
+        run: pip install poetry
+
+      - name: Install dependencies
+        run: poetry install
+
+      - name: Run API smoke test
+        run: |
+          set -euo pipefail
+          poetry run uvicorn coordinator.app.main:app --host 0.0.0.0 --port 8001 &
+          coord_pid=$!
+          COORDINATOR_BASE_URL=http://localhost:8001 poetry run uvicorn api.app.main:app --host 0.0.0.0 --port 8000 &
+          api_pid=$!
+          trap "kill $api_pid $coord_pid" EXIT
+          sleep 5
+          curl -fsS http://127.0.0.1:8000/healthz
+          curl -fsS http://127.0.0.1:8001/healthz
+          curl -fsS -X POST http://127.0.0.1:8000/dispatch \
+            -H 'Content-Type: application/json' \
+            -d '{"message":"ci-smoke"}'

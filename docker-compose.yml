@@ -3,7 +3,13 @@ services:
     build:
       context: .devcontainer
     volumes:
-      - .:/workspace:cached
+      - .:/workspace:delegated
+      - /workspace/node_modules
+      - /workspace/frontend/node_modules
+      - /workspace/backend/.venv
+      - /workspace/backend/__pycache__
+      - /workspace/backend/.pytest_cache
+      - /workspace/backend/.ruff_cache
     command: sleep infinity
     networks:
       - ragnet
